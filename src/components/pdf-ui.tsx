@@ -1,0 +1,15 @@
+import { Platform, Pressable, Text, View } from 'react-native';
+import { Check, FileText, Plus, Sparkles, type LucideIcon } from 'lucide-react-native';
+import { styles as s, green } from './pdf-styles';
+
+export function Button({ label, icon: Icon, onPress, secondary = false, disabled = false }: { label: string; icon?: LucideIcon; onPress: () => void; secondary?: boolean; disabled?: boolean }) {
+  return <Pressable accessibilityRole="button" disabled={disabled} onPress={onPress} style={({ pressed }) => [s.button, secondary && s.secondaryButton, disabled && { opacity: 0.45 }, pressed && { opacity: 0.8 }]}>{Icon && <Icon size={17} color={secondary ? green : 'white'} />}<Text style={[s.buttonText, secondary && { color: green }]}>{label}</Text></Pressable>;
+}
+export function IconButton({ icon: Icon, label, onPress, disabled, color = '#78847E' }: { icon: LucideIcon; label: string; onPress: () => void; disabled?: boolean; color?: string }) {
+  return <Pressable accessibilityRole="button" accessibilityLabel={label} disabled={disabled} onPress={onPress} style={({ pressed }) => [s.iconButton, pressed && { backgroundColor: '#E7EDE8' }, disabled && { opacity: 0.3 }]}><Icon size={18} color={color} /></Pressable>;
+}
+export function HeroIllustration() {
+  return <View style={s.heroArt}><View style={s.artCircle} /><View style={[s.artSheet, { transform: [{ rotate: '-16deg' }], left: 30, top: 36, backgroundColor: '#D5DFC4' }]} /><View style={[s.artSheet, { transform: [{ rotate: '10deg' }], left: 82, top: 18, backgroundColor: '#E8ECDD' }]} /><View style={{ position: 'absolute', left: 54, top: 11, transform: [{ rotate: '-5deg' }] }}><View style={s.paper}><View style={s.paperHeader}><View style={s.paperMark} /><View style={{ flex: 1, gap: 5 }}><View style={[s.line, { width: '65%', height: 5, backgroundColor: '#557663' }]} /><View style={[s.line, { width: '40%' }]} /></View></View><View style={[s.line, { marginTop: 15, width: '75%', height: 6 }]} /><View style={[s.line, { marginTop: 7, width: '95%' }]} /><View style={[s.line, { marginTop: 7, width: '85%' }]} /><View style={s.paperChart}>{[30, 47, 38, 63, 53, 68].map((h, i) => <View key={i} style={{ flex: 1, height: h, backgroundColor: i === 5 ? '#6D9773' : '#D3E1D3', borderTopLeftRadius: 3, borderTopRightRadius: 3 }} />)}</View><View style={[s.line, { marginTop: 12, width: '85%' }]} /><View style={[s.line, { marginTop: 6, width: '65%' }]} /></View></View><View style={s.pdfBadge}><FileText size={19} color="white" /><Text style={{ color: 'white', fontWeight: '700', fontSize: 15 }}>PDF</Text></View><View style={s.artCheck}><Check size={23} color={green} /></View><Sparkles style={{ position: 'absolute', top: 17, left: 15 }} size={24} color="#7F9C71" /><Plus style={{ position: 'absolute', bottom: 22, right: 15 }} size={19} color="#94AB7F" /></View>;
+}
+export const serif = Platform.OS === 'web' ? 'Georgia, serif' : Platform.OS === 'ios' ? 'Georgia' : 'serif';
+export const formatSize = (bytes: number) => bytes >= 1024 * 1024 ? `${(bytes / 1024 / 1024).toFixed(1)} MB` : `${Math.max(1, Math.round(bytes / 1024))} KB`;

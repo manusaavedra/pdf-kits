@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "pdf-kits",
+    "name": "PDF Kit",
     "slug": "pdf-kits",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -28,9 +28,18 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#208AEF",
+          "backgroundColor": "#F5F6EF",
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 76
+        }
+      ],
+      "expo-sharing",
+      [
+        "expo-image-picker",
+        {
+          "cameraPermission": "Permite usar la cámara para digitalizar documentos.",
+          "microphonePermission": false,
+          "photosPermission": "Permite acceder a tus fotos para convertirlas en PDF."
         }
       ]
     ],
